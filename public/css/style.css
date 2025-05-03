@@ -59,10 +59,6 @@ ul {
     border-radius: 10px;
 }
 
-.task-form {    
-    padding: 10px;
-}
-
 input {
     font-size: 24px;
     width: 85%;
@@ -115,10 +111,11 @@ button {
 .task-wrapper {
     background-color: #D9D9D9;
     width: 70%;
-    height: 50%;
     margin: 0 auto;
+    margin-bottom: 20px;
     text-align: center;
     border-radius: 10px;
+    padding: 10px;
 }
 
 .judge-button-area {
@@ -127,6 +124,21 @@ button {
     margin-left: auto;
 }
 .judge-button {
-    padding: 10px 40px;
+    padding: 7px 40px;
     margin: 0;
-    }
+    background-color: #2975f0;
+    color: #ffffff;
+}
+
+.judge-button:nth-child(1) {
+    background-color: #ff5bd6;
+}
+.is-pushed-button {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.reset-button {
+    background-color: rgb(92, 233, 84);
+    color: #ffffff;
+    font-weight: 900;
+}
