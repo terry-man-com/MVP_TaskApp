@@ -25,26 +25,22 @@
             <a class="button back-button" href="#">編集・削除</a>
         </div>
         <div class="task-wrapper">
-            <form class="task-form" method="" action="{{ route('task.store') }}">
-                @csrf
-                <ul>
-                    @foreach ($tasks as $task)
-                        <li class="task-list">
-                            <div class="task-body">
-                                {{$task->contents}}
-                            </div>
-                            <div class="judge-button-area">
-                                <button class="judge-button">◯</button>
-                                <button class="judge-button">✖️</button>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-                {{-- <div class="button-area">
-                    <button type="submit" class="all-delete-button">オールリセット</button>
-                </div> --}}
-            </form>
+            <ul class="task-area">
+                @foreach ($tasks as $task)
+                    <li class="task-list">
+                        <div class="task-body">
+                            {{$task->contents}}
+                        </div>
+                        <div class="judge-button-area">
+                            <button class="judge-button">◯</button>
+                            <button class="judge-button">×</button>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+            <button id="reset-button" class="reset-button">◯・× リセット</button>
         </div>
     </main>
+    <script src="{{ asset('js/main.js')}}"></script>
 </body>
 </html>
