@@ -22,8 +22,11 @@
         <h1 class="main-title">My Tasks</h1>
         <div class="upper-button-area">
             <a href="{{ route('task.create') }}" class="button create-button">タスク登録</a>
-            <a class="button back-button" href="#">編集・削除</a>
+            <a class="button back-button" href="{{ route('tasks.edit')}}">編集・削除</a>
         </div>
+        @if (session('success'))
+            <div class="message">{{ session('success')}}</div>
+        @endif
         <div class="task-wrapper">
             <ul class="task-area">
                 @foreach ($tasks as $task)
