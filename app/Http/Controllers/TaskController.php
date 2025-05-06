@@ -12,7 +12,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::orderBy('id', 'asc')->get();
         return view ('tasks.index', compact('tasks'));
     }
 
@@ -24,7 +24,7 @@ class TaskController extends Controller
         return view('tasks.create');
     }
 
-    /**
+/**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -33,12 +33,14 @@ class TaskController extends Controller
             'contents' => 'required|array',
             'contents.*' => 'nullable|string|max:25',
         ]);
+        // フォームで一括送信されたデータをひとつひとつ取り出したい
+        // inputメソッドを使用し、データを取り出し、$contentに格納
         foreach ($request->input('contents') as $content) {
             if (!empty($content)) {
                 Task::create(['contents' => $content]);
-            }
+            } // タスク登録を繰り返す
         }
-        return redirect()->route('task.create')->with('success', 'タスクを登録しました！');
+        return redirect()->route('task.index')->with('success', 'タスクを登録しました！');
     }
 
     /**
@@ -52,24 +54,41 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit()
     {
-        //
+        $tasks = Task::orderBy('id', 'asc')->get();
+        return view('tasks.edit', compact('tasks'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
-    {
-        //
-    }
+        public function update(Request $request)
+        {
+            // formで送信されたcontent[]を配列としてバリデーション
+            $request->validate([
+                'contents' => 'required|array', // contentsは配列かどうか
+                'contents.*' => 'nullable|string|max:25', // 配列に格納されている値に対してバリデーション
+            ]);
 
+            // フォーム送信されたデータを取得し、格納する（元々配列なので、キーと値を名前をつけて格納）
+            // 空でなければ、対応したIDをモデルから探し、updateで上書きする
+            foreach ($request->input('contents') as $id => $content) {
+                if (!empty($content)) {
+                    $task = Task::find($id);
+                    if($task) {
+                        $task->update(['contents' => $content]);
+                    }
+                }
+            }
+            return redirect()->route('tasks.edit')->with('update', 'タスクを更新しました！');
+        }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(Request $request, Task $task)
     {
-        //
+        $task->delete();
+        return redirect()->route('tasks.edit')->with('delete', '削除しました');
     }
 }

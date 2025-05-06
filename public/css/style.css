@@ -142,3 +142,20 @@ button {
     color: #ffffff;
     font-weight: 900;
 }
+
+/* 編集画面 */
+.edit-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 20px;
+}
+
+.edit-area input {
+    width: 80%;
+}
+
+
+
+
