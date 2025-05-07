@@ -23,6 +23,12 @@
         @if (session('success'))
             <div class="message">{{ session('success' )}}</div>
         @endif
+        @error("contents.*")
+            <div class="error create-error">{{ $message }}</div>
+        @enderror
+        @error("contents")
+            <div class="error create-error">{{ $message }}</div>
+        @enderror
         <div class="form-wrapper">
             <form class="task-form" method="post" action="{{ route('task.store') }}">
                 @csrf
@@ -32,7 +38,7 @@
                         </li>
                     @for($i = 0; $i < 4; $i++)
                         <li>
-                            <input type="text" name="contents[]" placeholder="">
+                            <input type="text" name="contents[]">
                         </li>
                     @endfor
                 </ul>

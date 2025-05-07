@@ -32,11 +32,14 @@
                 @csrf
                 @method('PUT')
             </form>
-            {{-- 一覧表示 --}}
+            {{-- 入力欄 --}}
             <ul class="edit-list">
                 @foreach($tasks as $task)
                     <li class="edit-area">
                         <input form="update-form" type="text" name="contents[{{ $task->id }}]" value="{{ old('contents.' . $task->id, $task->contents) }}">
+                            @error("contents.$task->id")
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         {{-- 削除用フォーム --}}
                         <form method="post" action="{{ route('task.destroy', $task->id)}}">
                             @csrf

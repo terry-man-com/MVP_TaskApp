@@ -41,6 +41,16 @@ ul {
     margin-bottom: 20px;
 }
 
+/* エラーメッセージ */
+.error {
+    color: #fc4141;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: left;
+}
+.create-error {
+    text-align: center;
+}
 /* create.blade.php */
 .main-wrapper {
     text-align: center;
@@ -87,7 +97,7 @@ button {
         color: #333333;
 }
 
-/* 一覧表示 */
+/* index.blade.php */
 .task-list {
     display: flex;
     align-items: center;
@@ -143,7 +153,7 @@ button {
     font-weight: 900;
 }
 
-/* 編集画面 */
+/* edit.blade.php */
 .edit-area {
     display: flex;
     align-items: center;
@@ -155,6 +165,7 @@ button {
 .edit-area input {
     width: 80%;
 }
+
 
 
 

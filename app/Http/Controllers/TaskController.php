@@ -29,13 +29,23 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        // フォームで一括送信されたデータをひとつひとつ取り出したい
+        // inputメソッドを使用し、データを取り出し、$contentに格納
+        $contents = $request->input('contents');
+
+        // フォーム全てが空かどうかを確認
+        if (collect($contents)->filter()->isEmpty()) {
+            return redirect()->back()
+                ->withErrors(['contents' => '1つ以上入力してください'])
+                ->withInput();
+        }
+
+        // 通常のバリデーション
         $request->validate([
             'contents' => 'required|array',
             'contents.*' => 'nullable|string|max:25',
         ]);
-        // フォームで一括送信されたデータをひとつひとつ取り出したい
-        // inputメソッドを使用し、データを取り出し、$contentに格納
-        foreach ($request->input('contents') as $content) {
+        foreach ($contents as $content) {
             if (!empty($content)) {
                 Task::create(['contents' => $content]);
             } // タスク登録を繰り返す
