@@ -179,6 +179,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'contents.*' => [
+            'max' => 'タスクは25文字以内で入力してください。'
+        ]
     ],
 
     /*
