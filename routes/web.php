@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('task.index');
 });
+
 
 Route::get('tasks/edit', [TaskController::class, 'edit'])
 ->name('tasks.edit');
