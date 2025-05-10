@@ -1,5 +1,5 @@
 // ボタン
-document.querySelectorAll('.judge-button-area').forEach((button) => {
+document.querySelectorAll('.judge-button').forEach((button) => {
     button.addEventListener("click", (e) => {
         const clickedButton = e.target;
         const parent = clickedButton.closest(".judge-button-area");
