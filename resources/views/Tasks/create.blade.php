@@ -34,11 +34,11 @@
                 @csrf
                 <ul>
                         <li>
-                            <input type="text" name="contents[]" placeholder="25文字以内で入れてください">
+                            <input type="text" name="contents[]" placeholder="25文字以内で入れてください" value="{{ old('contents.0')}}">
                         </li>
-                    @for($i = 0; $i < 4; $i++)
+                    @for($i = 1; $i < 5; $i++)
                         <li>
-                            <input type="text" name="contents[]">
+                            <input type="text" name="contents[]" value="{{ old('contents.' . $i)}}">
                         </li>
                     @endfor
                 </ul>
